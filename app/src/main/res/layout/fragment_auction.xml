@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".FragmentAuction">
+
+    <RelativeLayout
+        android:id="@+id/all"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <include layout="@layout/component_noti"/>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/noti"
+            >
+            <include layout="@layout/component_auction_btn"/>
+            <include layout="@layout/component_auction_btn2"/>
+            <include layout="@layout/component_auction_btn3"/>
+        </LinearLayout>
+
+
+
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/ribbon"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="80dp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_above="@id/center">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/ribbon_iv"-->
+<!--                android:layout_width="320dp"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:textAlignment="center"-->
+<!--                android:src="@drawable/auction_ribbon" />-->
+<!--            <TextView-->
+<!--                android:layout_width="320dp"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                style="@style/CustomTextWhite"-->
+<!--                android:gravity="center"-->
+<!--                android:text="샤모모 가습기"-->
+<!--                android:paddingBottom="8dp"-->
+<!--                android:layout_alignLeft="@+id/ribbon_iv"-->
+<!--                android:layout_alignTop="@+id/ribbon_iv"-->
+<!--                android:layout_alignRight="@+id/ribbon_iv"-->
+<!--                android:layout_alignBottom="@+id/ribbon_iv"-->
+<!--                />-->
+<!--        </RelativeLayout>-->
+
+
+        <LinearLayout
+            android:id="@+id/center"
+            android:padding="8dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/auction_round_box_full"
+            android:backgroundTint="@color/main_blue_sub"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <RelativeLayout
+                android:id="@+id/top_box"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:paddingTop="8dp"
+                android:background="@drawable/auction_round_full_top_box"
+                android:backgroundTint="@color/main_blue_sub"
+                android:layout_above="@+id/item_case">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomTextWhite"
+                    android:layout_alignParentLeft="true"
+                    android:text="한*주 님"
+                    android:textStyle="bold"/>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_baseline_info_24"/>
+            </RelativeLayout>
+
+            <include layout="@layout/component_money_light"/>
+
+            <RelativeLayout
+                android:id="@+id/item_case"
+                android:layout_width="240dp"
+                android:layout_height="300dp"
+                android:background="@drawable/auction_empty_round_box"
+                >
+                <RelativeLayout
+                    android:layout_above="@id/item_iv"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:paddingHorizontal="8dp"
+                        android:src="@drawable/auction_ribbon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        style="@style/CustomTextWhite"
+                        android:paddingBottom="4dp"
+                        android:layout_centerInParent="true"
+                        android:text="샤모모 가습기"/>
+                </RelativeLayout>
+
+
+                <ImageView
+                    android:id="@+id/item_iv"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:src="@drawable/test_item"/>
+
+                <RelativeLayout
+                    android:layout_below="@id/item_iv"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/timer_bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:paddingHorizontal="8dp"
+                        android:src="@drawable/ic_time_bar" />
+
+                    <TextView
+                        android:id="@+id/timer1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:paddingBottom="4dp"
+                        android:layout_centerInParent="true"
+                        android:text="12:00:59"
+                        android:textStyle="bold"/>
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/bs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:behavior_peekHeight="164dp"
+        android:background="@color/no_color"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+
+        <ImageButton
+            android:id="@+id/bs_button"
+            android:layout_marginLeft="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="bottom"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:backgroundTint="@color/no_color"
+            android:src="@drawable/ic_auction"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:orientation="vertical">
+
+<!--            <include-->
+<!--                android:id="@+id/invisible_current_price"-->
+<!--                layout="@layout/part_money_light"/>-->
+
+            <LinearLayout
+                android:id="@+id/invisible_current_price"
+                android:layout_marginVertical="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/auction_round_money_box_light"
+                >
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv"
+                        android:gravity="left|center_vertical"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/auction_round_money_box_full"
+                        android:text="    현재가"
+                        style="@style/CustomTextWhite"/>
+                    <ImageView
+                        android:layout_alignRight="@id/tv"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_coins"
+                        android:layout_centerVertical="true"
+                        />
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_current_item_price"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1,000,000,000,000,000"
+                    style="@style/CustomTextBlueDark"/>
+                <TextView
+                    android:layout_marginRight="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Coin"
+                    style="@style/CustomTextBlueDark"/>
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/invisible_timer"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="240dp"
+                    android:layout_height="80dp"
+                    android:paddingHorizontal="8dp"
+                    android:src="@drawable/ic_time_bar" />
+
+                <TextView
+                    android:id="@+id/timer2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingBottom="4dp"
+                    android:layout_centerInParent="true"
+                    android:text="12:00:59"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bs_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/bs_button"
+            android:gravity="center_vertical"
+            android:paddingTop="4dp"
+            android:paddingHorizontal="8dp"
+            android:background="@drawable/auction_round_full_top_box"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/bs_top_bar_text"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                style="@style/CustomTextWhite"
+                android:text="주문하기"
+                android:layout_gravity="left"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:background="@drawable/auction_round_full_top_box"/>
+
+            <ImageButton
+                android:id="@+id/bs_fold_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:backgroundTint="@color/main_blue_light"
+                android:paddingLeft="16dp"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/bs_top_bar"
+            android:background="@drawable/auction_box_empty"
+            android:layout_alignParentBottom="true"
+            android:scaleType="centerCrop">
+            <include layout="@layout/component_key_pad"/>
+        </FrameLayout>
+
+    </RelativeLayout>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

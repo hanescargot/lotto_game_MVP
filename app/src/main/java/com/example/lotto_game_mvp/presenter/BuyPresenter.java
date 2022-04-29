@@ -3,16 +3,19 @@ package com.example.lotto_game_mvp.presenter;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-public class BuyPresenter implements AccountContract.Presenter{
+import com.example.lotto_game_mvp.contract.BuyContract;
+import com.example.lotto_game_mvp.databinding.FragmentDashboardBinding;
 
-    public MutableLiveData<String> mText;
+public class BuyPresenter implements BuyContract.Presenter {
 
-    public BuyPresenter() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+    @Override
+    public void clickButton() {
+
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    @Override
+    public void bindView(){
+
     }
+
 }

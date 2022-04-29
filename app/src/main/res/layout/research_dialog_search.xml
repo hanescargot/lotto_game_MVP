@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".research.DialogFragmentSearch">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="24dp"
+        android:orientation="vertical"
+        android:background="@drawable/research_round_box">
+
+        <LinearLayout
+            android:id="@+id/top"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:background="@drawable/auction_empty_round_box"
+            >
+            <!--        공 입력 전-->
+            <LinearLayout
+                android:visibility="visible"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/CustomTextBlueDark"
+                    android:textColor="@color/custom_black_blue"
+                    android:gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:text="이 번호로 모든 회차에 구매했다면?" />
+            </LinearLayout>
+
+            <!--        공 넣기-->
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ball_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+            </LinearLayout>
+
+            <!--        확인 버튼-->
+            <LinearLayout
+                android:id="@+id/btn"
+                android:layout_margin="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@drawable/auction_round_box_full_subblue"
+                android:tag="unactivated"
+                android:clickable="true"
+                >
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="24dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:src="@drawable/research_search_icon" />
+
+                <TextView
+                    style="@style/CustomTextWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="8dp"
+                    android:text="확인" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <include
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="4dp"
+            android:layout_below="@+id/top"
+            android:id="@+id/center"
+            layout="@layout/component_number_check_pad"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</RelativeLayout>
