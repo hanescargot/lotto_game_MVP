@@ -1,4 +1,4 @@
-package com.example.lotto_game_mvp.ui.notifications;
+package com.example.lotto_game_mvp.view.notifications;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.lotto_game_mvp.R;
 import com.example.lotto_game_mvp.databinding.FragmentNotificationsBinding;
 
 public class NotificationsFragment extends Fragment {

@@ -1,4 +1,4 @@
-package com.example.lotto_game_mvp.ui.notifications;
+package com.example.lotto_game_mvp.view.notifications;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 public class NotificationsViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    public MutableLiveData<String> mText;
 
     public NotificationsViewModel() {
         mText = new MutableLiveData<>();

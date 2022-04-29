@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/xian/AndroidStudioProjects/lotto_game_mvp/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/xian/AndroidStudioProjects/lotto_game_mvp/app/src/main/res/layout/fragment_dashboard.xml" value="0.2046875" />
+        <entry key="..\:/Users/xian/AndroidStudioProjects/lotto_game_mvp/app/src/main/res/layout/fragment_home.xml" value="0.321875" />
+        <entry key="..\:/Users/xian/AndroidStudioProjects/lotto_game_mvp/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
       </map>
     </option>
   </component>
