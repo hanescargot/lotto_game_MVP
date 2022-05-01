@@ -1,4 +1,4 @@
-package com.example.lotto_game_mvp.data;
+package com.example.lotto_game_mvp.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

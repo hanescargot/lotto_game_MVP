@@ -1,4 +1,4 @@
-package com.example.lotto_game_mvp.data;
+package com.example.lotto_game_mvp.utils;
 
 import android.content.Context;
 

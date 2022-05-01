@@ -1,4 +1,4 @@
-package com.example.lotto_game_mvp.data;
+package com.example.lotto_game_mvp.utils;
 
 import android.content.Context;
 import android.util.Log;
@@ -33,7 +33,7 @@ public class WinNumDAO {
     }
 
 
-    //check data
+    //check utils
     public static boolean isStaticData(int drwNo){
         if (winningNumberHash.containsKey(drwNo)) return true;
         return false;

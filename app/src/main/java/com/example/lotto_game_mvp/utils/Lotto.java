@@ -1,6 +1,6 @@
-package com.example.lotto_game_mvp.data;
+package com.example.lotto_game_mvp.utils;
 
-import com.pyrion.game.lotto_shopping.R;
+import com.example.lotto_game_mvp.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

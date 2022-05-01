@@ -9,10 +9,10 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lotto_game_mvp.R;
-import com.example.lotto_game_mvp.data.Lotto;
-import com.example.lotto_game_mvp.data.SixNum;
-import com.example.lotto_game_mvp.data.UserTicketDAO;
-import com.example.lotto_game_mvp.data.UserTicketResultDB;
+import com.example.lotto_game_mvp.utils.Lotto;
+import com.example.lotto_game_mvp.utils.SixNum;
+import com.example.lotto_game_mvp.utils.UserTicketDAO;
+import com.example.lotto_game_mvp.utils.UserTicketResultDB;
 
 
 import java.util.ArrayList;

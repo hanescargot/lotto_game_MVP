@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/page_buy"
+        android:enabled="true"
+        android:icon="@drawable/bottom_lottery_selector"
+        android:title="구매"/>
+    <item
+        android:id="@+id/page_history"
+        android:enabled="true"
+        android:iconTintMode="src_in"
+        android:icon="@drawable/bottom_order_selector"
+        android:title="내역"/>
+    <item
+        android:id="@+id/page_auction"
+        android:enabled="true"
+        android:icon="@drawable/bottom_auction_selector"
+        android:title="경매"/>
+    <item
+        android:id="@+id/page_research"
+        android:enabled="true"
+        android:icon="@drawable/bottom_beaker_selector"
+        android:title="연구"/>
+</menu>

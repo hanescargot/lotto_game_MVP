@@ -1,4 +1,4 @@
-package com.example.lotto_game_mvp.data;
+package com.example.lotto_game_mvp.utils;
 
 public class User {
     public static String name = "null_name";

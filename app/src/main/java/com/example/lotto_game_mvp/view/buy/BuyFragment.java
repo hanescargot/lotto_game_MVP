@@ -19,11 +19,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.lotto_game_mvp.R;
 import com.example.lotto_game_mvp.adapters.NumberPadAdapter;
 import com.example.lotto_game_mvp.contract.BuyContract;
-import com.example.lotto_game_mvp.data.DeviceFile;
-import com.example.lotto_game_mvp.data.SixNum;
-import com.example.lotto_game_mvp.data.Ticket;
-import com.example.lotto_game_mvp.data.UserTicketDAO;
-import com.example.lotto_game_mvp.data.UserTicketResultDB;
+import com.example.lotto_game_mvp.utils.DeviceFile;
+import com.example.lotto_game_mvp.utils.SixNum;
+import com.example.lotto_game_mvp.utils.Ticket;
+import com.example.lotto_game_mvp.utils.UserTicketDAO;
+import com.example.lotto_game_mvp.utils.UserTicketResultDB;
 import com.example.lotto_game_mvp.databinding.FragmentDashboardBinding;
 import com.example.lotto_game_mvp.presenter.BuyPresenter;
 

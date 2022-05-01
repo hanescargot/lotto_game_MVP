@@ -1,4 +1,4 @@
-package com.example.lotto_game_mvp.data;
+package com.example.lotto_game_mvp.utils;
 
 public class WinNumDB {
     SixNum numbers = new SixNum();

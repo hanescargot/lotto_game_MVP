@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.lotto_game_mvp.view.research.ResearchFragment"
-        android:label="@string/title_home"
+        android:name="com.example.lotto_game_mvp.view.buy.BuyFragment"
+        android:label="구매"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.lotto_game_mvp.view.buy.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:name="com.example.lotto_game_mvp.view.research.ResearchFragment"
+        android:label="경매"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.lotto_game_mvp.view.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:label="연구"
         tools:layout="@layout/fragment_buy" />
 </navigation>

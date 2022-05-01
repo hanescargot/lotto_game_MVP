@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lotto_game_mvp.R;
-import com.example.lotto_game_mvp.data.Ticket;
+import com.example.lotto_game_mvp.utils.Ticket;
 
 import java.util.ArrayList;
 
