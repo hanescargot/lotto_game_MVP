@@ -74,14 +74,16 @@
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1">
-    </androidx.viewpager2.widget.ViewPager2>
-
-
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.viewpager2.widget.ViewPager2>
+    </ScrollView>
 
 <!--    app:itemIconTint="@color/main_blue_bg"-->
 <!--    app:itemTextColor="@color/main_blue_bg"-->
