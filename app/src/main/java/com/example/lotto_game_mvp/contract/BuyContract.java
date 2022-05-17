@@ -9,7 +9,7 @@ public interface BuyContract {
         public void sendBuyTicket(String msg);
     }
     interface Presenter extends BasePresenter{
-
+    //commit test
     }
 }
 
