@@ -30,7 +30,7 @@ import com.example.lotto_game_mvp.presenter.BuyPresenter;
 import java.util.Random;
 
 public class BuyFragment extends Fragment implements BuyContract.View {
-
+    private BuyPresenter presenter;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -55,6 +55,7 @@ public class BuyFragment extends Fragment implements BuyContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new BuyPresenter();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -130,6 +131,7 @@ public class BuyFragment extends Fragment implements BuyContract.View {
                     DeviceFile.adapterHistory.notifyDataSetChanged();
                 }
 //                todo 서버로 보내기
+                    presenter.clickButton();
 //                가격 계산하기
 //                롤백 기능
                 showToast("구매 완료");

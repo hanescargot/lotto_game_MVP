@@ -1,16 +1,17 @@
 package com.example.lotto_game_mvp.presenter;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
 import com.example.lotto_game_mvp.contract.BuyContract;
-import com.example.lotto_game_mvp.databinding.FragmentDashboardBinding;
+import com.example.lotto_game_mvp.model.BuyModel;
 
 public class BuyPresenter implements BuyContract.Presenter {
 
+    public BuyPresenter(){
+
+    }
+
     @Override
     public void clickButton() {
-
+        model.sendBuyTicket();
     }
 
     @Override

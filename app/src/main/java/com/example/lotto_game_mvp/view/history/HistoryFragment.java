@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
@@ -24,12 +25,7 @@ import com.example.lotto_game_mvp.utils.WinNumDB;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * A simple {@link androidx.fragment.app.Fragment} subclass.
- * Use the {@link HistoryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class HistoryFragment extends androidx.fragment.app.Fragment {
+public class HistoryFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,14 +40,6 @@ public class HistoryFragment extends androidx.fragment.app.Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment buy.
-     */
     // TODO: Rename and change types and number of parameters
     public static HistoryFragment newInstance(String param1, String param2) {
         HistoryFragment historyFragment = new HistoryFragment();
