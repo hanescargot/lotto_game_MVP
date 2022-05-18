@@ -17,7 +17,7 @@ import com.example.lotto_game_mvp.utils.UserTicketDAO;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
     BottomNavigationView bottomNavigationView;
 
     public int getItemId(int itemNum){

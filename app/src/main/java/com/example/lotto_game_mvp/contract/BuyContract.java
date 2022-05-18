@@ -3,22 +3,20 @@ package com.example.lotto_game_mvp.contract;
 import com.example.lotto_game_mvp.presenter.BuyPresenter;
 import com.example.lotto_game_mvp.utils.Ticket;
 
+import java.util.ArrayList;
+
 public interface BuyContract {
-    interface View extends BaseView<Presenter> {
-        public void loadToast(String msg);
-        public void sendBuyTicket(String msg);
+    interface View  {
+//        void show(Ticket ticket);//보여줄 것 없음
+        void resetCheckedNum();
+
     }
-    interface Presenter extends BasePresenter{
-    //commit test
+
+    interface Presenter {
+        void onBuyButtonClick(ArrayList<Integer> ticketNum);
+    }
+
+    interface Model {
+        void sendBuyTicket(ArrayList<Integer> ticketNum);
     }
 }
-
-interface BasePresenter {
-    public void send();
-}
-
-
-interface BaseView<T> {
-    T presenter;
-}
-

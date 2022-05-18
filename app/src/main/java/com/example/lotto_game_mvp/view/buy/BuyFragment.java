@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.lotto_game_mvp.R;
 import com.example.lotto_game_mvp.adapters.NumberPadAdapter;
 import com.example.lotto_game_mvp.contract.BuyContract;
+import com.example.lotto_game_mvp.model.BuyModel;
 import com.example.lotto_game_mvp.utils.DeviceFile;
 import com.example.lotto_game_mvp.utils.SixNum;
 import com.example.lotto_game_mvp.utils.Ticket;
@@ -30,7 +31,7 @@ import com.example.lotto_game_mvp.presenter.BuyPresenter;
 import java.util.Random;
 
 public class BuyFragment extends Fragment implements BuyContract.View {
-    private BuyPresenter presenter;
+    private BuyContract.Presenter presenter;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -47,15 +48,12 @@ public class BuyFragment extends Fragment implements BuyContract.View {
     GridView gridView;
     NumberPadAdapter gridAdapter;
 
-    @Override
-    public void showText() {
-
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new BuyPresenter();
+        presenter = new BuyPresenter(this, new BuyModel());
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -125,13 +123,13 @@ public class BuyFragment extends Fragment implements BuyContract.View {
             @Override
             public void onClick(View v) {
                 if(Ticket.buyNumberPadNum.size()!=6){ return; }
-                UserTicketResultDB newNumbers = new UserTicketResultDB(getActivity(), new SixNum(Ticket.buyNumberPadNum));
-                UserTicketDAO.addNewTicket( getActivity(),  newNumbers );
-                if(DeviceFile.adapterHistory != null){
-                    DeviceFile.adapterHistory.notifyDataSetChanged();
-                }
+//                UserTicketResultDB newNumbers = new UserTicketResultDB(getActivity(), new SixNum(Ticket.buyNumberPadNum));
+//                UserTicketDAO.addNewTicket( getActivity(),  newNumbers );
+//                if(DeviceFile.adapterHistory != null){
+//                    DeviceFile.adapterHistory.notifyDataSetChanged();
+//                }
 //                todo 서버로 보내기
-                    presenter.clickButton();
+                presenter.onBuyButtonClick(Ticket.buyNumberPadNum);
 //                가격 계산하기
 //                롤백 기능
                 showToast("구매 완료");
@@ -191,5 +189,10 @@ public class BuyFragment extends Fragment implements BuyContract.View {
         );
         toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
         toast.show();
+    }
+
+    @Override
+    public void resetCheckedNum() {
+
     }
 }
