@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lotto_game_mvp.R;
-import com.example.lotto_game_mvp.utils.Ticket;
+import com.example.lotto_game_mvp.utils.UserSelectedTicket;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class NumberPadAdapter extends BaseAdapter {
             selectableNumbers[temp] = temp;
         }
         btnSearch = btn;
-        numberPadNumAddress = Ticket.researchNumberPadNum;
+        numberPadNumAddress = UserSelectedTicket.researchNumberPadNum;
     }
     public NumberPadAdapter(Context context, ImageView buyBtn){
 
@@ -43,7 +43,7 @@ public class NumberPadAdapter extends BaseAdapter {
         for(int temp = 0; temp<selectableNumbers.length; temp++){
             selectableNumbers[temp] = temp;
         }
-        numberPadNumAddress = Ticket.buyNumberPadNum;
+        numberPadNumAddress = UserSelectedTicket.buyNumberPadNumCheckedNum;
 
     }
 
@@ -98,7 +98,8 @@ public class NumberPadAdapter extends BaseAdapter {
                     //이미 체크되어 있었던 것 클릭
                     iv.setVisibility(View.INVISIBLE);
                     if(numberPadNumAddress.contains(checkedNum)){
-                        numberPadNumAddress.contains(numberPadNumAddress.indexOf(checkedNum));
+                        //todo 선택 된것 풀기
+                        numberPadNumAddress.remove(numberPadNumAddress.indexOf(checkedNum));
                     }
                     return;
                 }

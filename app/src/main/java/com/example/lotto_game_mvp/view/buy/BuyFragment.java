@@ -10,22 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.lotto_game_mvp.R;
 import com.example.lotto_game_mvp.adapters.NumberPadAdapter;
 import com.example.lotto_game_mvp.contract.BuyContract;
 import com.example.lotto_game_mvp.model.BuyModel;
-import com.example.lotto_game_mvp.utils.DeviceFile;
-import com.example.lotto_game_mvp.utils.SixNum;
-import com.example.lotto_game_mvp.utils.Ticket;
-import com.example.lotto_game_mvp.utils.UserTicketDAO;
-import com.example.lotto_game_mvp.utils.UserTicketResultDB;
-import com.example.lotto_game_mvp.databinding.FragmentDashboardBinding;
+import com.example.lotto_game_mvp.utils.UserSelectedTicket;
 import com.example.lotto_game_mvp.presenter.BuyPresenter;
 
 import java.util.Random;
@@ -87,11 +78,7 @@ public class BuyFragment extends Fragment implements BuyContract.View {
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("초기화 완료");
-                Ticket.buyNumberPadNum.clear();
-
-                gridAdapter.notifyDataSetChanged();
-                buyBtn.setImageResource(R.drawable.ic_red_button_grey);
+                resetCheckedNum("리셋 완료");
             }
         });
 
@@ -100,17 +87,17 @@ public class BuyFragment extends Fragment implements BuyContract.View {
             @Override
             public void onClick(View v) {
                 Random random = new Random();
-                int newNumCount = Ticket.buyNumberPadNum.size();
+                int newNumCount = UserSelectedTicket.buyNumberPadNumCheckedNum.size();
                 if(newNumCount == 6){
                     showToast("이미 모든 번호가 선택되어 있습니다");
                 }else{
                     showToast("자동 번호 생성");
                     for (int i=0; i<(6-newNumCount); i++){
                         int newNum = random.nextInt(45)+1;
-                        while (Ticket.buyNumberPadNum.contains(newNum)){
+                        while (UserSelectedTicket.buyNumberPadNumCheckedNum.contains(newNum)){
                             newNum = random.nextInt(45)+1;
                         }
-                        Ticket.buyNumberPadNum.add( newNum );
+                        UserSelectedTicket.buyNumberPadNumCheckedNum.add( newNum );
                     }
                     gridAdapter.notifyDataSetChanged();
                     buyBtn.setImageResource(R.drawable.clickable_btn_red);
@@ -122,26 +109,26 @@ public class BuyFragment extends Fragment implements BuyContract.View {
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Ticket.buyNumberPadNum.size()!=6){ return; }
+                if(UserSelectedTicket.buyNumberPadNumCheckedNum.size()!=6){ return; }
 //                UserTicketResultDB newNumbers = new UserTicketResultDB(getActivity(), new SixNum(Ticket.buyNumberPadNum));
 //                UserTicketDAO.addNewTicket( getActivity(),  newNumbers );
 //                if(DeviceFile.adapterHistory != null){
 //                    DeviceFile.adapterHistory.notifyDataSetChanged();
 //                }
-//                todo 서버로 보내기
-                presenter.onBuyButtonClick(Ticket.buyNumberPadNum);
+//                todo xian 서버로 보내기
+                presenter.onBuyButtonClick(UserSelectedTicket.buyNumberPadNumCheckedNum); // checkedNum reset 은 presenter 가 해줌
 //                가격 계산하기
 //                롤백 기능
-                showToast("구매 완료");
-                Ticket.buyNumberPadNum.clear();
-                gridAdapter.notifyDataSetChanged();
-                buyBtn.setImageResource(R.drawable.ic_red_button_grey);
+//                showToast("구매 완료");
+//                UserSelectedTicket.buyNumberPadNumCheckedNum.clear();
+//                gridAdapter.notifyDataSetChanged();
+//                buyBtn.setImageResource(R.drawable.ic_red_button_grey);
 //
             }
         });
 
         tvNumPad = view.findViewById(R.id.number_pad_text);
-        tvNumPad.setText(Ticket.getNumPadText());
+        tvNumPad.setText(UserSelectedTicket.getNumPadText());
 
         arrayIv = new ImageView[]{
                 view.findViewById(R.id.buy_coin),
@@ -150,7 +137,7 @@ public class BuyFragment extends Fragment implements BuyContract.View {
         };
         for(ImageView iv : arrayIv){
             int ivTagNum = Integer.parseInt(iv.getTag().toString());
-            if ( ivTagNum==(Ticket.selected) ){
+            if ( ivTagNum==(UserSelectedTicket.selected) ){
                 iv.setBackground( getResources().getDrawable(R.drawable.buy_empty_round_box) );
             }
             iv.setOnClickListener(new View.OnClickListener() {
@@ -161,8 +148,8 @@ public class BuyFragment extends Fragment implements BuyContract.View {
 //                        iv.setBackground( getResources().getDrawable(R.drawable.buy_round_box) );
                         iv.setBackground( null );
                     }
-                    Ticket.selected = Integer.parseInt(v.getTag().toString());
-                    tvNumPad.setText(Ticket.getNumPadText());
+                    UserSelectedTicket.selected = Integer.parseInt(v.getTag().toString());
+                    tvNumPad.setText(UserSelectedTicket.getNumPadText());
 //                    ((ImageView)v).setImageTintList( null );
                     ((ImageView)v).setBackground( getResources().getDrawable(R.drawable.buy_empty_round_box) );
                 }
@@ -192,7 +179,10 @@ public class BuyFragment extends Fragment implements BuyContract.View {
     }
 
     @Override
-    public void resetCheckedNum() {
-
+    public void resetCheckedNum(String toastMsg) {
+        showToast(toastMsg);
+        UserSelectedTicket.buyNumberPadNumCheckedNum.clear();
+        gridAdapter.notifyDataSetChanged();
+        buyBtn.setImageResource(R.drawable.ic_red_button_grey);
     }
 }

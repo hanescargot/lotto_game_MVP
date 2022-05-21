@@ -2,15 +2,15 @@ package com.example.lotto_game_mvp.utils;
 
 import java.util.ArrayList;
 
-public class Ticket {
-    public static ArrayList<Integer> buyNumberPadNum = new ArrayList<>();  // 6개 체크 가능
+public class UserSelectedTicket {
+    public static ArrayList<Integer> buyNumberPadNumCheckedNum = new ArrayList<>();  // 6개 체크 가능
     public static ArrayList<Integer> researchNumberPadNum = new ArrayList<>();  // 6개 체크 가능
 
     private static final int COIN = 0 ;
     private static final int AD = 1 ;
     private static final int TIME = 2 ;
 
-    public static int selected = Ticket.AD;
+    public static int selected = UserSelectedTicket.AD;
 //    public static ArrayList<int[]> bought = new ArrayList<>();
 
     public static String getNumPadText(){
