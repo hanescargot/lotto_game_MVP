@@ -3,6 +3,7 @@ package com.example.lotto_game_mvp.adapters;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.lotto_game_mvp.contract.MainContract;
 import com.example.lotto_game_mvp.utils.Auction;
 import com.example.lotto_game_mvp.view.auction.AuctionFragment;
 import com.example.lotto_game_mvp.view.buy.BuyFragment;
@@ -17,7 +18,7 @@ public class MainPagerAdapter extends FragmentStateAdapter {
     public MainPagerAdapter(FragmentActivity fragmentActivity){
         super(fragmentActivity);
 
-        fragments[0] = new BuyFragment();
+        fragments[0] = new BuyFragment((MainContract.View)fragmentActivity);
         fragments[1] = new AuctionFragment();
         fragments[2] = new AuctionFragment();
         fragments[3] = new ResearchFragment();

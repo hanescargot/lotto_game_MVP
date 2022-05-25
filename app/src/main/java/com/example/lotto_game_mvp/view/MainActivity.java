@@ -8,18 +8,21 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 import com.example.lotto_game_mvp.R;
 import com.example.lotto_game_mvp.adapters.MainPagerAdapter;
+import com.example.lotto_game_mvp.contract.MainContract;
+import com.example.lotto_game_mvp.presenter.MainPresenter;
 import com.example.lotto_game_mvp.utils.DeviceFile;
 import com.example.lotto_game_mvp.utils.UserTicketDAO;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements MainContract.View {
     BottomNavigationView bottomNavigationView;
-
+    TextView tvUserMoney;
     public int getItemId(int itemNum){
         switch (itemNum){
             case 0:
@@ -33,14 +36,21 @@ public class MainActivity extends AppCompatActivity  {
         }
         return R.id.page_buy;
     }
+    //xian todo
+//    - sound action
+//    - point
+//    - 당첨 확률 과 텀
+
+    MainPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        presenter= new MainPresenter(this);
+        tvUserMoney = findViewById(R.id.money);
 
         ViewPager2 viewPager = findViewById(R.id.fragment_container);
         viewPager.setAdapter( new MainPagerAdapter(this));
-
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrollStateChanged(int state) {
@@ -79,7 +89,10 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
+
+
     }
+
 
     public void bottomIconColor(int color){
         int[][] states = new int[][] {
@@ -109,5 +122,9 @@ public class MainActivity extends AppCompatActivity  {
 
         //DB!!!   public -> pref
         DeviceFile.syncData();
+    }
+
+    public void setUserMoney(long coin){
+        tvUserMoney.setText(coin+"");
     }
 }

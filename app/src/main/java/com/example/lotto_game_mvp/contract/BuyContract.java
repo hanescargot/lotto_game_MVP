@@ -1,5 +1,9 @@
 package com.example.lotto_game_mvp.contract;
 
+import android.widget.TextView;
+
+import com.example.lotto_game_mvp.view.buy.BuyFragment;
+
 import java.util.ArrayList;
 
 public interface BuyContract {

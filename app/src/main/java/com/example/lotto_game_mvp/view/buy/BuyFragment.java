@@ -15,9 +15,11 @@ import androidx.fragment.app.Fragment;
 import com.example.lotto_game_mvp.R;
 import com.example.lotto_game_mvp.adapters.NumberPadAdapter;
 import com.example.lotto_game_mvp.contract.BuyContract;
+import com.example.lotto_game_mvp.contract.MainContract;
 import com.example.lotto_game_mvp.model.BuyModel;
 import com.example.lotto_game_mvp.utils.UserSelectedTicket;
 import com.example.lotto_game_mvp.presenter.BuyPresenter;
+import com.example.lotto_game_mvp.view.MainActivity;
 
 import java.util.Random;
 
@@ -39,11 +41,13 @@ public class BuyFragment extends Fragment implements BuyContract.View {
     GridView gridView;
     NumberPadAdapter gridAdapter;
 
-
+    public BuyFragment(MainContract.View mainView){
+        presenter = new BuyPresenter(this, new BuyModel(), mainView);
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new BuyPresenter(this, new BuyModel());
+
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -185,4 +189,5 @@ public class BuyFragment extends Fragment implements BuyContract.View {
         gridAdapter.notifyDataSetChanged();
         buyBtn.setImageResource(R.drawable.ic_red_button_grey);
     }
+
 }

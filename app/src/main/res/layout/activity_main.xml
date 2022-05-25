@@ -48,15 +48,17 @@
                             android:layout_centerVertical="true"
                             />
                     </RelativeLayout>
+
                     <TextView
-                        android:layout_toLeftOf="@id/coin"
-                        android:layout_centerInParent="true"
-                        android:layout_marginVertical="4dp"
-                        android:layout_marginHorizontal="8dp"
+                        android:id="@+id/money"
+                        style="@style/CustomTextBlueDark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1,000"
-                        style="@style/CustomTextBlueDark"/>
+                        android:layout_centerInParent="true"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginVertical="4dp"
+                        android:layout_toLeftOf="@id/coin"
+                        android:text="1,000" />
 
                     <TextView
                         android:id="@+id/coin"

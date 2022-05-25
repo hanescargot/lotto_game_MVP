@@ -3,6 +3,7 @@ package com.example.lotto_game_mvp.model;
 import com.example.lotto_game_mvp.contract.BuyContract;
 import com.example.lotto_game_mvp.network.RetrofitInterface;
 import com.example.lotto_game_mvp.utils.ResponseBuyNewLotto;
+import com.example.lotto_game_mvp.utils.User;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class BuyModel implements BuyContract.Model {
 
     public boolean sendBuyTicket(ArrayList<Integer> ticket){
+        User.money = 2500 ; // todo 응답값으로 바꿔야함
         return true;
         //Retrofit2 http 통신
 
