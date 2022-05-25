@@ -2,6 +2,7 @@ package com.example.lotto_game_mvp.contract;
 
 import android.widget.TextView;
 
+import com.example.lotto_game_mvp.utils.ResponseBuyNewLotto;
 import com.example.lotto_game_mvp.view.buy.BuyFragment;
 
 import java.util.ArrayList;
@@ -18,6 +19,6 @@ public interface BuyContract {
     }
 
     interface Model {
-        boolean sendBuyTicket(ArrayList<Integer> ticketNum);
+        ResponseBuyNewLotto sendBuyTicket(ArrayList<Integer> ticketNum);
     }
 }

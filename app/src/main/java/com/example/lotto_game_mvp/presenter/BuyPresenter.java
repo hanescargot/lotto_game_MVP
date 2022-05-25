@@ -2,6 +2,7 @@ package com.example.lotto_game_mvp.presenter;
 
 import com.example.lotto_game_mvp.contract.BuyContract;
 import com.example.lotto_game_mvp.contract.MainContract;
+import com.example.lotto_game_mvp.utils.ResponseBuyNewLotto;
 import com.example.lotto_game_mvp.utils.User;
 import com.example.lotto_game_mvp.view.MainActivity;
 
@@ -22,9 +23,10 @@ public class BuyPresenter implements BuyContract.Presenter {
     @Override
     public void onBuyButtonClick(ArrayList<Integer> ticketNum) {
         //구매 버튼 눌렀을 때
-        if( model.sendBuyTicket(ticketNum)){
+       ResponseBuyNewLotto res = model.sendBuyTicket(ticketNum);
+        if(res.getResultCode()==200){
             view.resetCheckedNum("구매 완료");
-            mainView.setUserMoney(999);
+            mainView.setUserMoney(res.getUserPoint());
         }
     }
 }

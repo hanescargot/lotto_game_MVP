@@ -3,6 +3,7 @@ package com.example.lotto_game_mvp.utils;
 import java.util.ArrayList;
 
 public class UserSelectedTicket {
+    // 구매 페이지에 사용자 티켓 상태
     public static ArrayList<Integer> buyNumberPadNumCheckedNum = new ArrayList<>();  // 6개 체크 가능
     public static ArrayList<Integer> researchNumberPadNum = new ArrayList<>();  // 6개 체크 가능
 

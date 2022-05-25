@@ -14,9 +14,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BuyModel implements BuyContract.Model {
 
-    public boolean sendBuyTicket(ArrayList<Integer> ticket){
-        User.money = 2500 ; // todo 응답값으로 바꿔야함
-        return true;
+    public ResponseBuyNewLotto sendBuyTicket(ArrayList<Integer> ticket){
+        ResponseBuyNewLotto res = new ResponseBuyNewLotto(200,999); // tmp response data
+        return res;
         //Retrofit2 http 통신
 
         //Retrofit 인스턴스 생성
