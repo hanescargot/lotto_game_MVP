@@ -13,4 +13,6 @@ import retrofit2.http.Path;
 public interface RetrofitInterface {
     @POST("/ticket/ad")  // 새로운 스터디 추가
     Call<ResponseBuyNewLotto> sendBuyTicket(@Body() ArrayList<Integer> buyNumberPadNumCheckedNum); // 남은 사용자 포인트를 응답
+
+
 }

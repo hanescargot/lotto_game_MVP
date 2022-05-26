@@ -187,9 +187,6 @@ public class AuctionFragment extends Fragment {
     }
 
 
-
-
-
     public void setTimerTask(){
         Timer timer = new Timer();
         TimerTask task = new TimerTask(){

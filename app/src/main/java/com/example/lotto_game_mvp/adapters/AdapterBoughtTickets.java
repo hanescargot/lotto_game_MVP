@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lotto_game_mvp.R;
 import com.example.lotto_game_mvp.utils.Lotto;
-import com.example.lotto_game_mvp.utils.SixNum;
+import com.example.lotto_game_mvp.utils.SixNumDto;
 import com.example.lotto_game_mvp.utils.UserTicketDAO;
 import com.example.lotto_game_mvp.utils.UserTicketResultDB;
 
@@ -18,6 +18,7 @@ import com.example.lotto_game_mvp.utils.UserTicketResultDB;
 import java.util.ArrayList;
 
 public class AdapterBoughtTickets extends RecyclerView.Adapter {
+    // 사용자가 회차에 구입한 티켓 목록 RecyclerView
     Context context;
     TextView tvNoTickets;
     LayoutInflater inflater;
@@ -35,11 +36,11 @@ public class AdapterBoughtTickets extends RecyclerView.Adapter {
         return new ViewHolder( itemView );
     }
 
-    ArrayList<UserTicketResultDB> userTicketResultDBs;
+    ArrayList<UserTicketResultDB> userTicketResultDBs = new ArrayList<>();
     @Override
     public int getItemCount() {
-        this.isHistory = !(Lotto.selectedDrwNo == Lotto.getThisWeekDrwNo()); //
-        userTicketResultDBs = (ArrayList<UserTicketResultDB>)(UserTicketDAO.getUserTicketArr(context, Lotto.selectedDrwNo)).clone(); //회차의 티켓들
+        this.isHistory = !(Lotto.selectedDrwNo == Lotto.getThisWeekDrwNo()); // todo error null exception
+//        userTicketResultDBs = (ArrayList<UserTicketResultDB>)(UserTicketDAO.getUserTicketArr(context, Lotto.selectedDrwNo)).clone(); //회차의 티켓들
         if(userTicketResultDBs==null){tvNoTickets.setVisibility(View.VISIBLE);
         }else {tvNoTickets.setVisibility(View.INVISIBLE);}
         return userTicketResultDBs.size();
@@ -50,11 +51,11 @@ public class AdapterBoughtTickets extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder)holder;
         UserTicketResultDB userTicketResult = userTicketResultDBs.get(position) ;
-        SixNum sixNum = userTicketResult.sixNum;
-        for(int i=0; i<sixNum.len(); i++){
+        SixNumDto sixNumDto = userTicketResult.sixNumDto;
+        for(int i = 0; i< sixNumDto.len(); i++){
             TextView tvBall = viewHolder.getBallTextViews()[i];
-            tvBall.setText(sixNum.getNumber(i));
-            tvBall.setBackgroundResource(Lotto.getBgSrc( sixNum.getNumber(i) ));
+            tvBall.setText(sixNumDto.getNumber(i));
+            tvBall.setBackgroundResource(Lotto.getBgSrc( sixNumDto.getNumber(i) ));
         }
         if(isHistory){
             //당첨결과 발표된 회차의 사용자 티켓

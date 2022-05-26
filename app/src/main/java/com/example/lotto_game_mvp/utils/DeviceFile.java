@@ -17,7 +17,7 @@ public class DeviceFile {
     public static String FILENAME_USER_TICKET_DB_ARRAY = "user_ticket_db_array";
     public static String boughtTicketKey = "week_bought_tickets";
 
-    public static Type TYPE_WIN_NUM_SET = new TypeToken<WinNumDB>(){}.getType();
+    public static Type TYPE_WIN_NUM_SET = new TypeToken<WinNumberDto>(){}.getType();
     public static Type TYPE_USER_TICKET_DB_ARRAY = new TypeToken< ArrayList<UserTicketResultDB> >(){}.getType();
 
 

@@ -5,11 +5,11 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SixNum {
+public class SixNumDto {
     int[] numbers = new int[6];
-    public SixNum(){
+    public SixNumDto(){
     }
-    public SixNum(ArrayList<Integer> newTicketNumber){
+    public SixNumDto(ArrayList<Integer> newTicketNumber){
         for(int i=0; i<newTicketNumber.size(); i++){
             numbers[i] = newTicketNumber.get(i);
         }

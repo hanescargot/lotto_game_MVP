@@ -19,7 +19,7 @@ public class MainPagerAdapter extends FragmentStateAdapter {
         super(fragmentActivity);
 
         fragments[0] = new BuyFragment((MainContract.View)fragmentActivity);
-        fragments[1] = new AuctionFragment();
+        fragments[1] = new HistoryFragment();
         fragments[2] = new AuctionFragment();
         fragments[3] = new ResearchFragment();
 

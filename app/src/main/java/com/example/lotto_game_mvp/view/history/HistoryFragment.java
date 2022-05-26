@@ -15,49 +15,36 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.RequestQueue;
 import com.example.lotto_game_mvp.R;
 import com.example.lotto_game_mvp.adapters.AdapterBoughtTickets;
+import com.example.lotto_game_mvp.contract.HistoryContract;
+import com.example.lotto_game_mvp.model.HistoryModel;
+import com.example.lotto_game_mvp.presenter.HistoryPresenter;
 import com.example.lotto_game_mvp.utils.Auction;
 import com.example.lotto_game_mvp.utils.DeviceFile;
 import com.example.lotto_game_mvp.utils.Lotto;
-import com.example.lotto_game_mvp.utils.SixNum;
-import com.example.lotto_game_mvp.utils.WinNumDAO;
-import com.example.lotto_game_mvp.utils.WinNumDB;
+import com.example.lotto_game_mvp.utils.SixNumDto;
+import com.example.lotto_game_mvp.utils.WinNumberDto;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends Fragment implements HistoryContract.View {
+    HistoryContract.Model model;
+    HistoryContract.Presenter presenter;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    TextView[] tvBallNum = new TextView[7];
+    TextView tvDrwNo, tvNoTickets;
+    TextView tvTimer;
+    View resultBalls;
+    AdapterBoughtTickets adapterHistory;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public HistoryFragment() {
-        // Required empty public constructor
-    }
-
-    // TODO: Rename and change types and number of parameters
-    public static HistoryFragment newInstance(String param1, String param2) {
-        HistoryFragment historyFragment = new HistoryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        historyFragment.setArguments(args);
-        return historyFragment;
-    }
-
+    RequestQueue requestQueue;
+    String[] key = {"drwtNo1", "drwtNo2", "drwtNo3", "drwtNo4", "drwtNo5", "drwtNo6"};
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        model = new HistoryModel(getContext());
+        presenter = new HistoryPresenter(this, model);
 
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -66,29 +53,24 @@ public class HistoryFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_histroy, container, false);
     }
 
-    TextView[] tvBallNum = new TextView[7];
-    TextView tvDrwNo, tvNoTickets;
-    TextView tvTimer;
-    View resultBalls;
-    AdapterBoughtTickets adapterHistory;
     @Override
     public void onViewCreated(View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         for(int i=0; i<tvBallNum.length; i++){
+            // 당첨번호 tv
             tvBallNum[i] = view.findViewById(R.id.tv_ball_1+i);
         }
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        tvTimer = view.findViewById(R.id.tv_timer);
-        resultBalls = view.findViewById(R.id.result_balls);
-        tvNoTickets = view.findViewById(R.id.tv_no_tickets);
+        tvTimer = view.findViewById(R.id.tv_timer); // 당첨번호가 없는 경우 다음 당첨 결과까지의 시간
+        resultBalls = view.findViewById(R.id.result_balls); // 당첨번호 공 Set
+        tvNoTickets = view.findViewById(R.id.tv_no_tickets);  // not bought history
         adapterHistory = new AdapterBoughtTickets(getActivity(), tvNoTickets);//SharedPref.getData("week_bought_tickets", )
-        DeviceFile.adapterHistory  = adapterHistory;
+        DeviceFile.adapterHistory  = adapterHistory;  // ??? 왜 저장해둠??
         recyclerView.setAdapter(adapterHistory);
-
 
         tvDrwNo = view.findViewById(R.id.drw_no);
         tvDrwNo.setText(Lotto.selectedDrwNo+" 회");
-        setLottoResultBall(Lotto.selectedDrwNo);
+        presenter.onChangeWinNumbers(Lotto.selectedDrwNo);
 
         ImageButton btnLeft = view.findViewById(R.id.btn_left);
         ImageButton btnRight = view.findViewById(R.id.btn_right);
@@ -97,7 +79,7 @@ public class HistoryFragment extends Fragment {
             public void onClick(View v) {
                 Lotto.selectedDrwNo -= 1;
                 tvDrwNo.setText(Lotto.selectedDrwNo+" 회");
-                setLottoResultBall(Lotto.selectedDrwNo);
+                presenter.onChangeWinNumbers(Lotto.selectedDrwNo);
                 if(  Lotto.selectedDrwNo != Lotto.getThisWeekDrwNo()) btnRight.setVisibility(View.VISIBLE);
                 if( Lotto.selectedDrwNo == 1 )btnLeft.setVisibility(View.INVISIBLE);
             }
@@ -107,7 +89,7 @@ public class HistoryFragment extends Fragment {
             public void onClick(View v) {
                 Lotto.selectedDrwNo += 1;
                 tvDrwNo.setText(Lotto.selectedDrwNo+" 회");
-                setLottoResultBall(Lotto.selectedDrwNo);
+                presenter.onChangeWinNumbers(Lotto.selectedDrwNo);
                 if( Lotto.selectedDrwNo == Lotto.getThisWeekDrwNo() )btnRight.setVisibility(View.INVISIBLE);
                 if( Lotto.selectedDrwNo != 1 )btnLeft.setVisibility(View.VISIBLE);
             }
@@ -134,9 +116,12 @@ public class HistoryFragment extends Fragment {
 
     }
 
-    RequestQueue requestQueue;
-    String[] key = {"drwtNo1", "drwtNo2", "drwtNo3", "drwtNo4", "drwtNo5", "drwtNo6"};
-    public void setLottoResultBall(int drwNo){
+
+    @Override
+    public void setWinNumbers(int drwNo, WinNumberDto windNumber) {
+        // 보여 줘야할 당첨 결과 정보가 바뀌었을 때
+
+        // 당첨 결과 ball view setting by 회차
         adapterHistory.notifyDataSetChanged();
         if(drwNo == Lotto.getThisWeekDrwNo()){
             //아직 당첨 결과가 없는 주
@@ -147,18 +132,11 @@ public class HistoryFragment extends Fragment {
         //과거 당첨결과 일 때
         tvTimer.setVisibility(View.INVISIBLE);
         resultBalls.setVisibility(View.VISIBLE);
-
-        WinNumDB winNumDB = WinNumDAO.getWinNumSet(getActivity(), drwNo); //서버인지 내부저장소인지 알아서 판단해서 가져옴
-        SixNum sixNum = winNumDB.getNumbers();
-        for (int i=0; i<sixNum.len(); i++){
+        SixNumDto sixNum = windNumber.getSixNum();
+        for (int i = 0; i< sixNum.len(); i++){
             int num = sixNum.getNumber(i);
             tvBallNum[i].setText(num+"");
             tvBallNum[i].setBackgroundResource( Lotto.getBgSrc(num) );
         }
     }
-
-
-
-
-
 }
