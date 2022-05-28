@@ -1,7 +1,10 @@
 package com.example.lotto_game_mvp.presenter;
 
+import android.util.Log;
+
 import com.example.lotto_game_mvp.contract.HistoryContract;
 import com.example.lotto_game_mvp.utils.WinNumberDto;
+import com.google.gson.Gson;
 
 public class HistoryPresenter implements HistoryContract.Presenter {
     public HistoryContract.View view = null;
@@ -14,6 +17,8 @@ public class HistoryPresenter implements HistoryContract.Presenter {
     @Override
     public void onChangeWinNumbers(int drwNo) {
         WinNumberDto windNumber = model.getWinNumbers(drwNo);
+//        Log.i("Model", new Gson().toJson( windNumber) ) ;
+
         view.setWinNumbers(drwNo, windNumber);
     }
 

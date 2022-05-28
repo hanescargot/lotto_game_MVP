@@ -20,42 +20,60 @@ public class HistoryModel implements HistoryContract.Model {
     Context context;
     public HistoryModel(Context context){
         this.context = context;
-    }
+    } // presenter 만들어서 presenter call
 
     @Override
-    public WinNumberDto getWinNumbers(int drwNo) {
+     public WinNumberDto getWinNumbers(int drwNo) {
         WinNumberDto winNumSet = new WinNumberDto();
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         String[] key = {"drwtNo1", "drwtNo2", "drwtNo3", "drwtNo4", "drwtNo5", "drwtNo6"};
         String url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo="+drwNo;
+        Log.i("Model", "START" );
 
         StringRequest request = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        HashMap<String, Double> data = new Gson().fromJson(response, HashMap.class);
+                        Log.e("fafasfaf", response);
+
+                        HashMap<String, Object> data = new Gson().fromJson(response, HashMap.class);
                         if (data.isEmpty()) {
                             Log.i("Error", "API Error: Data is Empty");
                             return; //Error
+                        } else if(data.get("returnValue") != null && data.get("returnValue").toString().equals("fail")){
+                            Log.i("Error", "API Error: RetrunValue Fail");
+                            return; //Error
                         }
                         SixNumDto numbers = new SixNumDto();
+                        double tempNum ;
                         for (String keyString : key) {
                             //당첨 번호 추가
-                            int num = data.get(keyString).intValue();
-                            numbers.setNum(numbers.len(),num);
+                            Log.e("tesstet", data.get(keyString).toString());
+                            tempNum = (double)data.get(keyString);
+                            int num = (int)tempNum;
+                            numbers.setNum(numbers.len()-1, num);
                         }
-                        int bNum = data.get("bnusNo").intValue(); // 보너스 넘버
+                        tempNum = (double)data.get("bnusNo");
+                        int bNum = (int)tempNum;  // 보너스 넘버
                         winNumSet.setbNum(bNum);
                         winNumSet.setNumbers(numbers);
+                        Log.i("Model", new Gson().toJson(winNumSet) );
+                        Log.i("Model", response );
+
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i("Error", "API Error: Error Response");
+                        Log.i("Error", error.toString());
                     }
                 }
         );
+        requestQueue.add(request);
+        Log.i("Model", "END" );
+
+
 
         return  winNumSet;
     }

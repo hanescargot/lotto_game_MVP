@@ -42,9 +42,8 @@ public class HistoryFragment extends Fragment implements HistoryContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        model = new HistoryModel(getContext());
+        model = new HistoryModel(getContext()); // model 과 presenter 연결
         presenter = new HistoryPresenter(this, model);
-
     }
 
     @Override
@@ -57,20 +56,22 @@ public class HistoryFragment extends Fragment implements HistoryContract.View {
     public void onViewCreated(View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         for(int i=0; i<tvBallNum.length; i++){
-            // 당첨번호 tv
+            // 당첨번호 tv binding
             tvBallNum[i] = view.findViewById(R.id.tv_ball_1+i);
         }
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         tvTimer = view.findViewById(R.id.tv_timer); // 당첨번호가 없는 경우 다음 당첨 결과까지의 시간
         resultBalls = view.findViewById(R.id.result_balls); // 당첨번호 공 Set
         tvNoTickets = view.findViewById(R.id.tv_no_tickets);  // not bought history
-        adapterHistory = new AdapterBoughtTickets(getActivity(), tvNoTickets);//SharedPref.getData("week_bought_tickets", )
-        DeviceFile.adapterHistory  = adapterHistory;  // ??? 왜 저장해둠??
+        adapterHistory = new AdapterBoughtTickets(getActivity(), tvNoTickets); // 사용자가 구매한 티켓 목록 recyclerView
+        //SharedPref.getData("week_bought_tickets", )
+//        DeviceFile.adapterHistory  = adapterHistory;  // ??? 왜 저장해둠??
         recyclerView.setAdapter(adapterHistory);
 
         tvDrwNo = view.findViewById(R.id.drw_no);
         tvDrwNo.setText(Lotto.selectedDrwNo+" 회");
-        presenter.onChangeWinNumbers(Lotto.selectedDrwNo);
+
+        presenter.onChangeWinNumbers(Lotto.selectedDrwNo); // todo : 최신 회차로 Setting
 
         ImageButton btnLeft = view.findViewById(R.id.btn_left);
         ImageButton btnRight = view.findViewById(R.id.btn_right);
@@ -95,12 +96,12 @@ public class HistoryFragment extends Fragment implements HistoryContract.View {
             }
         });
 
-        if( Lotto.selectedDrwNo == Lotto.getThisWeekDrwNo() )btnRight.setVisibility(View.INVISIBLE);
+        if( Lotto.selectedDrwNo >= Lotto.getThisWeekDrwNo() )btnRight.setVisibility(View.INVISIBLE);
         if( Lotto.selectedDrwNo == 1 )btnLeft.setVisibility(View.INVISIBLE);
 
         Handler handler = new Handler(){
             public void handleMessage(Message msg) {
-                String endTimeString = "2021-10-30 23:59:59";//todo change
+                String endTimeString = "2021-10-30 23:59:59";//todo : 다음 회차까지 남은 시간
                 tvTimer.setText("당첨 결과까지 "+ Auction.getLeftTime(endTimeString)+" 남음");
             }
         };
@@ -112,8 +113,7 @@ public class HistoryFragment extends Fragment implements HistoryContract.View {
             }
         };
         Timer historyTimer = new Timer();
-        historyTimer.scheduleAtFixedRate(task, 0, 1000); //1000ms = 1sec
-
+        historyTimer.scheduleAtFixedRate(task, 0, 1000); //1000ms = 1sec  // ???이게... 뭐한거였더라..
     }
 
 

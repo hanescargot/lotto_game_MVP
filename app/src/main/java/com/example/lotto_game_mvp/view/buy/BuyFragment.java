@@ -34,10 +34,6 @@ public class BuyFragment extends Fragment implements BuyContract.View {
     public BuyFragment(MainContract.View mainView){
         presenter = new BuyPresenter(this, new BuyModel(), mainView);
     }
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
