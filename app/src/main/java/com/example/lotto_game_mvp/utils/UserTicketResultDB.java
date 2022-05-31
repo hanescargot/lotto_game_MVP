@@ -2,16 +2,18 @@ package com.example.lotto_game_mvp.utils;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+
 public class UserTicketResultDB {
     public Context context;
     public int drwNo = 0;
-    public SixNumDto sixNumDto;
+    public ArrayList<Integer> sixNumDto;
     public int resultRanking;
     public long resultMoney;
     public String time = "null_time"; //"yyyy-MM-dd hh:mm:ss"
 
     int DEFAULT_NULL_NUM = 0;
-    public UserTicketResultDB(Context context, SixNumDto sixNumDto){
+    public UserTicketResultDB(Context context, ArrayList<Integer> sixNumDto){
         this.context = context;
         this.sixNumDto = sixNumDto;
         this.resultRanking = DEFAULT_NULL_NUM;
@@ -19,7 +21,7 @@ public class UserTicketResultDB {
         this.time =  Lotto.getCurrentTime();
         this.drwNo = DEFAULT_NULL_NUM;
     }
-    public UserTicketResultDB(Context context, int drwNo, SixNumDto sixNumDto, int resultRanking, long resultMoney) {
+    public UserTicketResultDB(Context context, int drwNo, ArrayList<Integer>  sixNumDto, int resultRanking, long resultMoney) {
         this.context = context;
         this.drwNo = drwNo;
         this.sixNumDto = sixNumDto;
@@ -39,7 +41,7 @@ public class UserTicketResultDB {
         }
     }
 
-    public int getResultRankingInt(int drwNo, SixNumDto userSixNumDto){
+    public int getResultRankingInt(int drwNo, ArrayList<Integer>  userSixNumDto){
         // todo xian :  당첨 등수 리턴
 
         int correct = 0;

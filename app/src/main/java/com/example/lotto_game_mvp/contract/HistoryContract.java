@@ -1,6 +1,5 @@
 package com.example.lotto_game_mvp.contract;
 
-import com.example.lotto_game_mvp.utils.SixNumDto;
 import com.example.lotto_game_mvp.utils.WinNumberDto;
 
 public interface HistoryContract {

@@ -10,10 +10,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.lotto_game_mvp.contract.HistoryContract;
-import com.example.lotto_game_mvp.utils.SixNumDto;
 import com.example.lotto_game_mvp.utils.WinNumberDto;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HistoryModel implements HistoryContract.Model {
@@ -44,19 +44,19 @@ public class HistoryModel implements HistoryContract.Model {
                             Log.i("Error", "API Error: RetrunValue Fail");
                             return; //Error
                         }
-                        SixNumDto numbers = new SixNumDto();
+                        ArrayList<Integer> sixNum = new ArrayList<>();
                         double tempNum ;
                         for (String keyString : key) {
                             //당첨 번호 추가
                             Log.e("tesstet", data.get(keyString).toString());
-                            tempNum = (double)data.get(keyString);
-                            int num = (int)tempNum;
-                            numbers.setNum(numbers.len()-1, num);
+
+                            int num = (int)(double)(data.get(keyString));
+                            sixNum.add(num);
                         }
                         tempNum = (double)data.get("bnusNo");
                         int bNum = (int)tempNum;  // 보너스 넘버
                         winNumSet.setbNum(bNum);
-                        winNumSet.setNumbers(numbers);
+                        winNumSet.setNumbers(sixNum);
                         Log.i("Model", new Gson().toJson(winNumSet) );
                         Log.i("Model", response );
 

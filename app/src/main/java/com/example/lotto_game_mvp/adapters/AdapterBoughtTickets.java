@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lotto_game_mvp.R;
 import com.example.lotto_game_mvp.utils.Lotto;
-import com.example.lotto_game_mvp.utils.SixNumDto;
-import com.example.lotto_game_mvp.utils.UserTicketDAO;
 import com.example.lotto_game_mvp.utils.UserTicketResultDB;
 
 
@@ -51,11 +49,11 @@ public class AdapterBoughtTickets extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder)holder;
         UserTicketResultDB userTicketResult = userTicketResultDBs.get(position) ;
-        SixNumDto sixNumDto = userTicketResult.sixNumDto;
-        for(int i = 0; i< sixNumDto.len(); i++){
+        ArrayList<Integer>  sixNumDto = userTicketResult.sixNumDto;
+        for(int i = 0; i< sixNumDto.size(); i++){
             TextView tvBall = viewHolder.getBallTextViews()[i];
-            tvBall.setText(sixNumDto.getNumber(i));
-            tvBall.setBackgroundResource(Lotto.getBgSrc( sixNumDto.getNumber(i) ));
+            tvBall.setText(sixNumDto.get(i));
+            tvBall.setBackgroundResource(Lotto.getBgSrc( sixNumDto.get(i) ));
         }
         if(isHistory){
             //당첨결과 발표된 회차의 사용자 티켓

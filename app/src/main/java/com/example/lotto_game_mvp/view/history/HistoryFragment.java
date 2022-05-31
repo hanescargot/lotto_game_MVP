@@ -19,11 +19,10 @@ import com.example.lotto_game_mvp.contract.HistoryContract;
 import com.example.lotto_game_mvp.model.HistoryModel;
 import com.example.lotto_game_mvp.presenter.HistoryPresenter;
 import com.example.lotto_game_mvp.utils.Auction;
-import com.example.lotto_game_mvp.utils.DeviceFile;
 import com.example.lotto_game_mvp.utils.Lotto;
-import com.example.lotto_game_mvp.utils.SixNumDto;
 import com.example.lotto_game_mvp.utils.WinNumberDto;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -132,9 +131,9 @@ public class HistoryFragment extends Fragment implements HistoryContract.View {
         //과거 당첨결과 일 때
         tvTimer.setVisibility(View.INVISIBLE);
         resultBalls.setVisibility(View.VISIBLE);
-        SixNumDto sixNum = windNumber.getSixNum();
-        for (int i = 0; i< sixNum.len(); i++){
-            int num = sixNum.getNumber(i);
+        ArrayList<Integer> sixNum = windNumber.getSixNum();
+        for (int i = 0; i< sixNum.size(); i++){
+            int num = sixNum.get(i);
             tvBallNum[i].setText(num+"");
             tvBallNum[i].setBackgroundResource( Lotto.getBgSrc(num) );
         }
