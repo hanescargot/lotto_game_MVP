@@ -29,7 +29,7 @@ public class Lotto {
         return (int) nextEpi;
     }
 
-    public static int getThisWeekDrwNo(){
+    public static int getNextWeekDrwNo(){
         return getLatestDrwNo()+1;
     }
 

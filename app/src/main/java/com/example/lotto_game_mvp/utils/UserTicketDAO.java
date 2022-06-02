@@ -25,7 +25,7 @@ public class UserTicketDAO {
     private UserTicketDAO(){}
 
     public static void addNewTicket(Context context, UserTicketResultDB ticketNumSet){
-        int drwNo = Lotto.getThisWeekDrwNo();
+        int drwNo = Lotto.getNextWeekDrwNo();
         ticketNumberSetsHash.get(drwNo).add(ticketNumSet);
         Log.i("hash", ticketNumberSetsHash + "");
     }
@@ -40,8 +40,8 @@ public class UserTicketDAO {
     public static boolean syncTicketData(Context context){
         if(isNeedTicketUpdate(context)){
             // public에만 추가한 것이 있는 경우
-            addToServer(context, Lotto.getThisWeekDrwNo(), ticketNumberSetsHash.get(Lotto.getLatestDrwNo()));
-            addToDevice(context, Lotto.getThisWeekDrwNo(), ticketNumberSetsHash.get(Lotto.getLatestDrwNo()));
+            addToServer(context, Lotto.getNextWeekDrwNo(), ticketNumberSetsHash.get(Lotto.getLatestDrwNo()));
+            addToDevice(context, Lotto.getNextWeekDrwNo(), ticketNumberSetsHash.get(Lotto.getLatestDrwNo()));
             return true;//업데이트 됨
         }
         // 다른점이 없는 경우

@@ -1,10 +1,8 @@
 package com.example.lotto_game_mvp.presenter;
 
-import android.util.Log;
-
 import com.example.lotto_game_mvp.contract.HistoryContract;
-import com.example.lotto_game_mvp.utils.WinNumberDto;
-import com.google.gson.Gson;
+import com.example.lotto_game_mvp.utils.Lotto;
+import com.example.lotto_game_mvp.utils.LottoTicketDTO;
 
 public class HistoryPresenter implements HistoryContract.Presenter {
     public HistoryContract.View view = null;
@@ -16,7 +14,7 @@ public class HistoryPresenter implements HistoryContract.Presenter {
     }
     @Override
     public void onChangeWinNumbers(int drwNo) {
-        model.getWinNumbers(drwNo, view);
+       model.setWinNumbers(drwNo, view);
     }
 
     // view : set

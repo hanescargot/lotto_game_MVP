@@ -7,14 +7,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.lotto_game_mvp.contract.HistoryContract;
-import com.example.lotto_game_mvp.utils.WinNumberDto;
+import com.example.lotto_game_mvp.utils.LottoTicketDTO;
 import com.google.gson.Gson;
-
-import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,8 +24,8 @@ public class HistoryModel implements HistoryContract.Model {
     }
 
     @Override
-     public void getWinNumbers(int drwNo, HistoryContract.View view) {
-        WinNumberDto winNumSet = new WinNumberDto();
+     public void setWinNumbers(int drwNo, HistoryContract.View view) {
+        LottoTicketDTO winNumSet = new LottoTicketDTO();
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         String[] key = {"drwtNo1", "drwtNo2", "drwtNo3", "drwtNo4", "drwtNo5", "drwtNo6"};
         String url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo="+drwNo;
@@ -80,6 +77,11 @@ public class HistoryModel implements HistoryContract.Model {
         Log.i("Model", "END" );
     }
 
+    @Override
+    public ArrayList<LottoTicketDTO> getUserBoughtTickets(int drwNo) {
+        // todo 사용자가 구매한 티켓 리스트
+        ArrayList<LottoTicketDTO> userTicketHistoryList = new ArrayList<>();
 
-
+        return userTicketHistoryList;
+    }
 }
