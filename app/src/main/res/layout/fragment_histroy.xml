@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    tools:context=".FragmentAuction">
+    android:orientation="vertical">
 
 <!--    main-->
     <LinearLayout
@@ -64,6 +63,7 @@
             android:layout_gravity="center"
             android:text="당첨 결과까지 4일 24시 12분 10초 남음"
             style="@style/CustomTextBlueDark"
+            android:visibility="invisible"
             />
     </FrameLayout>
 
@@ -80,19 +80,19 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <androidx.recyclerview.widget.RecyclerView
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
         <TextView
             android:id="@+id/tv_no_tickets"
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="구매한 기록이 없습니다."
-            />
+            android:layout_centerInParent="true"
+            android:text="구매한 기록이 없습니다." />
     </RelativeLayout>
 
 

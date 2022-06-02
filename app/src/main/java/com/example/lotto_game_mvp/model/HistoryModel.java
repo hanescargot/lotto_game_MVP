@@ -7,28 +7,34 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.lotto_game_mvp.contract.HistoryContract;
 import com.example.lotto_game_mvp.utils.WinNumberDto;
 import com.google.gson.Gson;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HistoryModel implements HistoryContract.Model {
     Context context;
+    HistoryContract.Presenter presenter;
     public HistoryModel(Context context){
         this.context = context;
-    } // presenter 만들어서 presenter call
+    }
 
     @Override
-     public WinNumberDto getWinNumbers(int drwNo) {
+     public void getWinNumbers(int drwNo, HistoryContract.View view) {
         WinNumberDto winNumSet = new WinNumberDto();
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         String[] key = {"drwtNo1", "drwtNo2", "drwtNo3", "drwtNo4", "drwtNo5", "drwtNo6"};
         String url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo="+drwNo;
         Log.i("Model", "START" );
+
+        //todo 스레드 처리
 
         StringRequest request = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -59,7 +65,7 @@ public class HistoryModel implements HistoryContract.Model {
                         winNumSet.setNumbers(sixNum);
                         Log.i("Model", new Gson().toJson(winNumSet) );
                         Log.i("Model", response );
-
+                        view.setWinNumbers(drwNo, winNumSet);
                     }
                 },
                 new Response.ErrorListener() {
@@ -72,10 +78,6 @@ public class HistoryModel implements HistoryContract.Model {
         );
         requestQueue.add(request);
         Log.i("Model", "END" );
-
-
-
-        return  winNumSet;
     }
 
 

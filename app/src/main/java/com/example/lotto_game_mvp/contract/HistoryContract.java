@@ -10,6 +10,6 @@ public interface HistoryContract {
         void onChangeWinNumbers(int drwNo);
     }
     interface Model{
-        WinNumberDto getWinNumbers(int drwNo);
+        void getWinNumbers(int drwNo , HistoryContract.View view);
     }
 }

@@ -16,10 +16,7 @@ public class HistoryPresenter implements HistoryContract.Presenter {
     }
     @Override
     public void onChangeWinNumbers(int drwNo) {
-        WinNumberDto windNumber = model.getWinNumbers(drwNo);
-//        Log.i("Model", new Gson().toJson( windNumber) ) ;
-
-        view.setWinNumbers(drwNo, windNumber);
+        model.getWinNumbers(drwNo, view);
     }
 
     // view : set

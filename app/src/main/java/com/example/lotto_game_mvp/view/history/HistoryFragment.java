@@ -3,6 +3,7 @@ package com.example.lotto_game_mvp.view.history;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.example.lotto_game_mvp.presenter.HistoryPresenter;
 import com.example.lotto_game_mvp.utils.Auction;
 import com.example.lotto_game_mvp.utils.Lotto;
 import com.example.lotto_game_mvp.utils.WinNumberDto;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -48,6 +50,7 @@ public class HistoryFragment extends Fragment implements HistoryContract.View {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Lotto.selectedDrwNo = Lotto.getLatestDrwNo(); // 처음 보여질 회차
         return inflater.inflate(R.layout.fragment_histroy, container, false);
     }
 
@@ -68,9 +71,8 @@ public class HistoryFragment extends Fragment implements HistoryContract.View {
         recyclerView.setAdapter(adapterHistory);
 
         tvDrwNo = view.findViewById(R.id.drw_no);
-        tvDrwNo.setText(Lotto.selectedDrwNo+" 회");
-
-        presenter.onChangeWinNumbers(Lotto.selectedDrwNo); // todo : 최신 회차로 Setting
+        tvDrwNo.setText(Lotto.getLatestDrwNo()+" 회");
+        presenter.onChangeWinNumbers(Lotto.getLatestDrwNo());
 
         ImageButton btnLeft = view.findViewById(R.id.btn_left);
         ImageButton btnRight = view.findViewById(R.id.btn_right);
@@ -119,23 +121,25 @@ public class HistoryFragment extends Fragment implements HistoryContract.View {
     @Override
     public void setWinNumbers(int drwNo, WinNumberDto windNumber) {
         // 보여 줘야할 당첨 결과 정보가 바뀌었을 때
-
+        Log.i("!!", new Gson().toJson(windNumber) );
         // 당첨 결과 ball view setting by 회차
-        adapterHistory.notifyDataSetChanged();
         if(drwNo == Lotto.getThisWeekDrwNo()){
             //아직 당첨 결과가 없는 주
             tvTimer.setVisibility(View.VISIBLE);
             resultBalls.setVisibility(View.INVISIBLE);
+            adapterHistory.notifyDataSetChanged(); // 사용자 구매 티켓 데이터 업로드
             return;
         }
         //과거 당첨결과 일 때
         tvTimer.setVisibility(View.INVISIBLE);
         resultBalls.setVisibility(View.VISIBLE);
         ArrayList<Integer> sixNum = windNumber.getSixNum();
+        Log.i("EE",new Gson().toJson(sixNum));
         for (int i = 0; i< sixNum.size(); i++){
             int num = sixNum.get(i);
             tvBallNum[i].setText(num+"");
             tvBallNum[i].setBackgroundResource( Lotto.getBgSrc(num) );
         }
+        adapterHistory.notifyDataSetChanged(); // 사용자 구매 티켓 데이터 업로드
     }
 }

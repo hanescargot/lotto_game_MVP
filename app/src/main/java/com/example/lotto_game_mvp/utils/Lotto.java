@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Lotto {
+    private Lotto(){
+        //싱글톤 패턴
+    }
     //View에 관한 것
-    public static int selectedDrwNo; //on history
+    public static int selectedDrwNo = 1; //on history
 
     public static int getLatestDrwNo() {
         String startDate = "2002-12-07 23:59:59";
